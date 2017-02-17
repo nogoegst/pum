@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"reflect"
 	"strings"
 
 	"github.com/nogoegst/balloon"
@@ -62,6 +63,7 @@ func DeriveKeymaterial(l uint32, passphrase, salt []byte) ([]byte, error) {
 
 func main() {
 	var outSizeFlag = flag.Int("n", 16, "Bytesize of the output")
+	var newPasswordFlag = flag.Bool("new", false, "This is a new password and has to be double-checked")
 	flag.Parse()
 	outSize := uint32(*outSizeFlag)
 	if len(flag.Args()) > 1 {
@@ -74,6 +76,17 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println()
+	if *newPasswordFlag {
+		fmt.Printf("repeat passphrase: ")
+		pp2, err := terminal.ReadPassword(0)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println()
+		if !reflect.DeepEqual(pp2, pp) {
+			log.Fatal("Passphrases do not match")
+		}
+	}
 	key, err := DeriveKeymaterial(outSize, pp, salt)
 	if err != nil {
 		log.Fatal(err)
