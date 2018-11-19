@@ -1,0 +1,10 @@
+github.com/nogoegst/balloon v1.0.0 h1:AR+K9ms82FvwTm/7xUHfaW4zfvrwh1XlMl8wY8SQuC4=
+github.com/nogoegst/balloon v1.0.0/go.mod h1:1RAzCsTZJCwHlOLIirlT3PcfUlozAm1RSe9cN4qt3e0=
+github.com/nogoegst/blake2xb v1.0.1 h1:hIIGR66RaVLJ+mdIC+pjnmZv+U5bLK8blfWfpYdlK8A=
+github.com/nogoegst/blake2xb v1.0.1/go.mod h1:AFV0VXeSZGZzTboEqZA6iotzRm7YOOcRX4oO1lk1aN8=
+github.com/nogoegst/terminal v0.0.0-20161218222815-90cba33d8a32 h1:simxFvS/SVzTohFO1okadTzQUq6pPcIHaybXhmvJDuE=
+github.com/nogoegst/terminal v0.0.0-20161218222815-90cba33d8a32/go.mod h1:g+SXgiCkECTsL9F34kYXN2GZOlH+q2lQQ/7L6x2DF8o=
+golang.org/x/crypto v0.0.0-20181112202954-3d3f9f413869 h1:kkXA53yGe04D0adEYJwEVQjeBppL01Exg+fnMjfUraU=
+golang.org/x/crypto v0.0.0-20181112202954-3d3f9f413869/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
+golang.org/x/sys v0.0.0-20181119195503-ec83556a53fe h1:I5KvcSfxR/TkvFksuALBTCS44kh6MaPO1rHR9vT0iQQ=
+golang.org/x/sys v0.0.0-20181119195503-ec83556a53fe/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
