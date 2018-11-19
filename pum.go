@@ -2,24 +2,25 @@
 //
 // To the extent possible under law, Ivan Markin waived all copyright
 // and related or neighboring rights to this module of pum, using the creative
-// commons "cc0" public domain dedication. See LICENSE or
+// commons "CC0" public domain dedication. See LICENSE or
 // <http://creativecommons.org/publicdomain/zero/1.0/> for full details.
 
 package main
 
 import (
+	"crypto/subtle"
 	"encoding/base32"
 	"encoding/hex"
 	"flag"
 	"fmt"
 	"io"
 	"log"
-	"reflect"
 	"strings"
 
 	"github.com/nogoegst/balloon"
 	"github.com/nogoegst/blake2xb"
 	"github.com/nogoegst/terminal"
+	"golang.org/x/crypto/blake2b"
 )
 
 var (
@@ -30,16 +31,15 @@ var (
 )
 
 func KeyDerivationReader(xoflen uint32, passphrase, salt []byte) (io.Reader, error) {
-	b2Config := &blake2xb.Config{}
-	h, err := blake2xb.New(b2Config)
+	h, err := blake2b.New512(nil)
 	if err != nil {
 		return nil, err
 	}
 	secret := balloon.Balloon(h, passphrase, salt, uint64(sCost/h.Size()), uint64(tCost))
-	b2Config.Tree = &blake2xb.Tree{XOFLength: xoflen}
+	b2Config := blake2xb.NewConfig(xoflen)
 	b2Config.Salt = hashSalt
 	b2Config.Person = hashPerson
-	b2xb, err := blake2xb.NewX(b2Config)
+	b2xb, err := blake2xb.NewWithConfig(b2Config)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ func main() {
 			log.Fatal(err)
 		}
 		fmt.Println()
-		if !reflect.DeepEqual(pp2, pp) {
+		if subtle.ConstantTimeCompare(pp2, pp) != 1 {
 			log.Fatal("Passphrases do not match")
 		}
 	}
